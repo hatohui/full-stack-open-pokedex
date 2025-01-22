@@ -13,7 +13,7 @@ describe('Pokedex', () => {
 
   test('you can navigate to specific pokemons', async ({ page }) => {
     await page.goto('/')
-    const locator = await page.locator('a').locator('text=Bulbasaur')
+    const locator = await page.locator('a').locator('text=bulbasaur')
     await locator.click()
     await page.waitForNavigation()
     await expect(page).toHaveURL('/pokemon/bulbasaur')
