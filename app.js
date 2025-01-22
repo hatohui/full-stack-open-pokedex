@@ -14,4 +14,8 @@ app.get('/loser', (req, res) => {
   res.send('hatohui')
 })
 
+app.get('/furry', (req, res) => {
+  res.send('hatohui')
+})
+
 app.listen(PORT, () => {})
