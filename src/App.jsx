@@ -5,7 +5,6 @@ import LoadingSpinner from './LoadingSpinner'
 import ErrorMessage from './ErrorMessage'
 import PokemonPage from './PokemonPage'
 import PokemonList from './PokemonList'
-import Health from './Health'
 
 const mapResults = ({ results }) =>
   results.map(({ url, name }) => ({
@@ -58,7 +57,6 @@ const App = () => {
           />
         }
       />
-      <Route path="/health" element={<Health />} />
     </Routes>
   )
 }
