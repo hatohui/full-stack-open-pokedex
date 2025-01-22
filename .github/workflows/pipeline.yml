@@ -1,4 +1,4 @@
-name: Code Format Linting
+name: Simple Pipeline
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  simple_pipelines:
+  simple_pipeline:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v4
