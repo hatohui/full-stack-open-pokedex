@@ -15,7 +15,6 @@ describe('Pokedex', () => {
     await page.goto('/')
     const locator = await page.locator('a').locator('text=bulbasaur')
     await locator.click()
-    await page.waitForNavigation()
     await expect(page).toHaveURL('/pokemon/bulbasaur')
     await expect(page.getByText('chlorophyll')).toBeVisible()
   })
