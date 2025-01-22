@@ -9,7 +9,7 @@
     "test": "jest",
     "eslint": "eslint \"./**/*.{js,jsx}\"",
     "build": "webpack --mode production",
-    "e2e-test": "playwright test"
+    "e2e-test": "npx playwright test"
   },
   "repository": {
     "type": "git",
@@ -57,6 +57,10 @@
     "react-router-dom": "^6.21.1"
   },
   "jest": {
-    "testEnvironment": "jsdom"
+    "testEnvironment": "jsdom",
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/tests/"
+    ]
   }
 }
