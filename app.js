@@ -10,4 +10,8 @@ app.get('/health', (req, res) => {
   res.send('ok')
 })
 
+app.get('/furry', (req, res) => {
+  res.send('hatohui')
+})
+
 app.listen(PORT, () => {})
