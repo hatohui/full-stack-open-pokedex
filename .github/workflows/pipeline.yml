@@ -44,7 +44,12 @@ jobs:
   tag_release:
     needs: [simple_pipeline]
     runs-on: ubuntu-20.04
+    permissions:
+      contents: write
+    if: ${{ github.event_name == 'pull_request' }}
     steps:
+      - name: Code checkout
+        uses: actions/checkout@v4
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@v1
         env:
