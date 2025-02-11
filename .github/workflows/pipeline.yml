@@ -8,6 +8,10 @@ on:
     branches: [main]
     types: [opened, synchronize]
 
+env:
+  SKIP_DEPLOYMENT: ${{ contains(github.event.head_commit.message, '#skip') }}
+  SKIP_TAGGING: ${{ contains(github.event.head_commit.message, '#skip') }}
+
 jobs:
   simple_pipeline:
     runs-on: ubuntu-20.04
@@ -34,19 +38,21 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 30
+
       - name: Trigger deployment
-        if: ${{ github.event_name == 'push' }}
+        if: ${{ github.event_name == 'push' && env.SKIP_DEPLOYMENT == 'false' }}
         uses: sws2apps/render-deployment@main
         with:
           serviceId: ${{ secrets.RENDER_SERVICE_ID }}
           apiKey: ${{ secrets.RENDER_API_KEY }}
           multipleDeployment: false
+
   tag_release:
     needs: [simple_pipeline]
     runs-on: ubuntu-20.04
     permissions:
       contents: write
-    if: ${{ github.event_name == 'pull_request' }}
+    if: ${{ github.event_name == 'pull_request' && github.env.SKIP_TAGGING == 'false' }}
     steps:
       - name: Code checkout
         uses: actions/checkout@v4
@@ -54,3 +60,4 @@ jobs:
         uses: anothrNick/github-tag-action@v1
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          DEFAULT_BUMP: none
